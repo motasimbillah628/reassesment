@@ -1,0 +1,5 @@
+
+
+openvas username: admin
+
+password: admin@1234

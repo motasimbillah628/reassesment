@@ -1,0 +1,68 @@
+﻿Job-3: Acunetix
+
+Install source: https://github.com/rafat1999
+Login url: https://127.0.0.1:3443
+Gmail: kali@gmail.com
+Password: admin@1234
+Target: add target http://192.168.78.129/dvwa/index.php
+Login site :url username password
+
+Job -4: openvas gvm
+Sudo gvm-start
+https://127.0.0.1:9392/login
+admin
+admin@1234
+configure->target->cosidure host alive
+scan->task->new task menu -> save
+
+
+
+Feed update
+
+
+sudo rm /var/lib/gvm/feed-update.lock
+ 
+sudo rm /var/lib/openvas/feed-update.lock
+ 
+sudo greenbone-feed-sync --type all
+
+Job-5:Hashcat
+
+hashcat --version
+hURL -m "kali" 
+
+hash-identifier “d6ca3fd0c3a3b462ff2b83436dda495e”
+echo "d6ca3fd0c3a3b462ff2b83436dda495e" > hash22.txt
+ls -lh /usr/share/wordlists 
+hashcat -m 0 -a 0 hash22.txt /usr/share/wordlists/rockyou.txt
+hashcat -m 0 -a 3 hashes2.txt "?l?l?l?l" 
+hashcat -m 0 -a 0 hashes.txt rockyou.txt –-show 
+
+Job-7: Post exploitation
+
+sysinfo 
+ps
+kill <PID>
+pwd
+ls
+cd <directory_path>
+
+mkdir NSDA
+shell
+echo "This is a test entry" > FILE4.txt
+exit
+rm FILE4.txt
+
+download /path/to/target/folder /local/path/
+upload /local/path/file.txt /path/to/target/
+search -f *.txt
+arp
+getuid
+shell
+net user
+exit
+Screenshot
+background
+
+
+exit

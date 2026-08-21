@@ -1,0 +1,137 @@
+========================================
+1. OpenVAS
+========================================
+Openvas
+Step -1: Install and configure OpenVAS/GVM and verify on kali linux
+To update the system and initialize OpenVAS/GVM on Kali Linux, the following commands were executed:
+
+# Update repository and packages
+sudo apt update && sudo apt upgrade -y
+# Install OpenVAS / GVM
+sudo apt install gvm -y
+# Setup and sync vulnerability feeds
+sudo gvm-setup
+# Check GVM setup status and verify services
+sudo gvm-check-setup
+# Start GVM service
+sudo gvm-start
+
+Run Openvas/gvm :
+
+Step -2: Login openvas:
+  Opened Web Browser and accessed: https://127.0.0.1:9392
+  Logged in using the administrator credentials created during gvm-setup
+
+Step -3: Add target(Target Configuration)
+
+Step -4: Create a scan task & Scan Task Execution
+
+Step -5: Set task:
+
+Step -6: Identify and analyze discovered vulnerabilities
+
+Step -7: Vunnerability results and identify Critical ,High and Medium
+
+Security Recommendations
+Patch Management: Regularly update and patch all OS components, services, and web application platforms.
+Network Segmentation & Firewall: Implement firewalls to restrict public access to sensitive administrative ports (e.g., FTP, SSH).
+Harden Service Configurations: Disable unnecessary services, default credentials, and insecure authentication methods (e.g., anonymous access).
+Note: The Metasploitable server presents significant security risks due to multiple outdated and unpatched services (such as FTP and web servers). Immediate remediation steps, including applying software patches and restricting unauthorized access, are strongly recommended to secure the target environment against potential threats.
+
+========================================
+2. Post-Exploitation Tasks using Meterpreter
+========================================
+Post-Exploitation Tasks using Meterpreter
+create malware
+
+1. Retrieve and document target system information:
+2. Identify and terminate a test process
+3. Navigate through the target file system
+4. Create a designated NSDA directory:
+5. Create and update a designated FILE4.txt file:
+6. Remove the designated FILE4.txt file:
+7. Download a designated text file/folder from the target system
+8. Upload a designated text file/folder to the authorized lab environment
+9. Search for specified .txt files within the target environment
+10. Retrieve and document the target ARP table:
+11. Enumerate and analyze the available user accounts
+12. Capture the target screen for authorized lab evidence:
+13. Place active session in background and manage session:
+14. Safely terminate the Meterpreter session and target VM:
+
+========================================
+3. Web Vulnerability Assessment using Acunetix
+========================================
+Web vulnerability assessment using Acuetix
+Start Acunitex after install acunetex:
+Step-1: Login in to the acunetix Dashboard browser:
+Step-2: Create new Terget:
+Step-3: configure the target setting:
+Step-4: Start a Full Scan on the target:
+Step-5: Monitor the scan progress until it completes:
+Step-6: Complete the scan and review the scan results and identify the discovered vulnerabilities:
+Step-7: Analyze the following vulnerability types: SQL injection:
+Cross site scripting(XSS):Cross-site Request Forgery(CSRF)
+File Inclusion (LFI / RFI) :
+Step-9: Generate and export the scan report in PDF or HTML format:
+Step-8: For each identified vulnerability document
+
+1. SQL Injection (SQLi)
+Vulnerability Name: SQL Injection (Error-Based / Blind)
+Risk Level: Critical
+Description: Input supplied to parameters (e.g., id) is insufficiently sanitized before being concatenated into a database query, allowing unauthorized database querying, data extraction, or authentication bypass.
+Affected URL: http://<DVWA_IP>/vulnerabilities/sqli/?id=1&Submit=Submit
+Recommended Remediation: Implement parameterized queries (prepared statements) using PDO or MySQLi to decouple code from data.
+
+2. Cross-Site Scripting (XSS)
+Vulnerability Name: Reflected / Stored Cross-Site Scripting
+Risk Level: High
+Description: Unsanitized user input is reflected or stored in the Web UI without contextual escaping, enabling malicious scripts to execute in the user's browser context and steal session cookies.
+Affected URL: http://<DVWA_IP>/vulnerabilities/xss_r/?name=<script>alert(1)</script>
+Recommended Remediation: Encode output based on context (HTML, attribute, JavaScript context) using safe API functions like htmlspecialchars().
+
+3. Cross-Site Request Forgery (CSRF)
+Vulnerability Name: Cross-Site Request Forgery (Password Change)
+Risk Level: not find
+
+4. File Inclusion (LFI / RFI)
+Vulnerability Name: Local / Remote File Inclusion
+Risk Level: High to Critical
+Description: User input passed to file-handling functions (like include() or require()) is executed directly without whitelist validation, allowing arbitrary local file reading or remote code execution.
+Affected URL: http://<DVWA_IP>/vulnerabilities/fi/?page=../../../../etc/passwd
+Recommended Remediation: Avoid passing dynamic paths directly into file-inclusion functions. Maintain a strict whitelist of allowed filenames and set allow_url_include = Off in php.ini.
+
+5. Security Misconfigurations
+Vulnerability Name: Information Disclosure / Verbose Error Messages / Missing Hardening Headers
+Risk Level: Low to Medium
+Description: Server responses display detailed PHP error stack traces, default configuration pages, or missing HTTP security headers (X-Frame-Options, Content-Security-Policy), aiding attackers during reconnaissance.
+Affected URL: http://<DVWA_IP>/
+Recommended Remediation: Set display_errors = Off in PHP settings, obscure server header tokens, and configure security headers via Web Server directives (Apache/Nginx).
+
+Note: Add pdf document this folder(acunetix.pdf)
+
+========================================
+4. Hashcat
+========================================
+Hashcat
+Step-1: install and configure hashcat on kali linux
+Step-2 and 3: Make hash File and hash identifier
+Step -4: Configure Hashcat with the approved wordlist and required parameters.
+ls -lh /usr/share/wordlists
+Step-5: 5. Perform a dictionary-based password audit against the authorized hash.
+hashcat -m 0 -a 0 hashes.txt /usr/share/wordlists/rockyou.txt
+
+show password:hashcat -m 0 -a 0 hashes.txt rockyou.txt –-show
+Step-6. Perform a mask-based password audit using the predefined lab pattern.
+hURL -m "mali"
+echo "d372d4727d7feea47b8c92f8a137c05d" >hashes2.txt
+hashcat -m 0 -a 3 hashes2.txt "?l?l?l?l"
+Step-8:
+8. Monitor and record attack mode, hash rate, progress, recovery status, and execution time.
+Attack Mode: Dictionary Attack
+Hash Type: MD5
+Hashcat Mode: 0
+Hash Rate: 15.2 MH/s
+Progress: 100%
+Recovery: 1/1
+Execution Time: 00:00:03
